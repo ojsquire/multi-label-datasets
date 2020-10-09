@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
     b. Add your virtual environment to Jupyter
     ```
-    python -m ipykernel install --name=.venv
+    python -m ipykernel install --name=multi-label-datasets
     ```
     c. Open JupyterLab:
     ```
@@ -46,5 +46,5 @@ pip install -r requirements.txt
     ```
     Note: to remove kernel from Jupyter:
     ```
-    jupyter kernelspec uninstall .venv
+    jupyter kernelspec uninstall multi-label-datasets
     ```
