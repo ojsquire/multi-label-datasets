@@ -22,10 +22,9 @@ In the document I explore the suitability of datasets for training a multi-label
 4. RCV1 - agreement clauses needs to be checked
 5. Reuters - agreement clauses needs to be checked
 
-```{code-cell} ipython
+```{code-cell} ipython3
 from src.load_datasets import *
 import matplotlib as mpl
-import pickle
 
 %matplotlib inline
 %load_ext autoreload
@@ -33,7 +32,7 @@ import pickle
 ```
 
 ## CMU movie summary dataset
-```{code-cell} ipython
+```{code-cell} ipython3
 meta = get_movies()
 meta = clean_up_genre(meta)
 class_dists = data_to_plot(meta)
@@ -46,7 +45,7 @@ plot_class_dists(class_dists, "Label distribution, CMU dataset")
 ```
 
 ## Toxic comments dataset
-```{code-cell} ipython
+```{code-cell} ipython3
 toxic_comments = get_toxic_comments()
 toxic_comments = get_toxic_label_counts(toxic_comments)
 
@@ -59,8 +58,7 @@ plot_class_dists(class_dists, "Label distribution, toxic comments dataset")
 ```
 
 ## RCV1 dataset
-```{code-cell} ipython
-
+```{code-cell} ipython3
 with open("datasets/rcv1.multilabel/rcv1.multilabel.labels.pkl", "rb") as pickle_file:
     rcv1 = pickle.load(pickle_file)
 
