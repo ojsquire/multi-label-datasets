@@ -36,15 +36,6 @@ pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
-7. Set Jupyter notebook kernel to use Python from your virtual environment ([more info](https://janakiev.com/blog/jupyter-virtual-envs/)).
-    * Add your virtual environment to Jupyter by running:
-    ```
-    python -m ipykernel install --name=multi-label-datasets
-    ```
-    * Note: to remove kernel from Jupyter:
-    ```
-    jupyter kernelspec uninstall multi-label-datasets
-    ```
 
 # Datasets
 The following datasets are used here:
@@ -69,10 +60,18 @@ jupytext analysis.md --to ipynb
 ```
 
 # Extending the analysis
-If you want to extend this analysis and see the results at the same time, the easiest way is to pair the markdown file with the jupyter notebook you generated in the last step. To pair the md and ipynb:
+If you want to extend this analysis and see the results at the same time, the easiest way is to pair the markdown file with the jupyter notebook you generated in the last step. To do so, follow these steps:
 
-1. Start jupyter lab:
+1. Since we need to use jupyter with some extensions that were installed into your virtual environment, set the Jupyter notebook kernel to use Python from your virtual environment ([more info](https://janakiev.com/blog/jupyter-virtual-envs/)), by running:
+    ```
+    python -m ipykernel install --name=multi-label-datasets
+    ```
+2. Start jupyter lab from the command line of your virtual environment:
 ```
 jupyter lab
 ```
-2. Open `analysis.ipynb` and use `jupytext` to pair it with `analysis.md`. See instructions [here](https://jupytext.readthedocs.io/en/latest/paired-notebooks.html).
+3. Open `analysis.ipynb` (created in previous section) and use the `jupytext` extension to pair it with `analysis.md`. See instructions [here](https://jupytext.readthedocs.io/en/latest/paired-notebooks.html).
+4. If you want to remove the custom kernel from Jupyter run:
+    ```
+    jupyter kernelspec uninstall multi-label-datasets
+    ```
