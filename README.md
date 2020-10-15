@@ -36,20 +36,12 @@ pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
-
-7. Set Jupyter notebook kernel to use Python from your virtual environment ([more info](https://janakiev.com/blog/jupyter-virtual-envs/))
-
-    a. Install `ipykernel` (should already be done from requirements.txt)
-
-    b. Add your virtual environment to Jupyter
+7. Set Jupyter notebook kernel to use Python from your virtual environment ([more info](https://janakiev.com/blog/jupyter-virtual-envs/)).
+    * Add your virtual environment to Jupyter by running:
     ```
     python -m ipykernel install --name=multi-label-datasets
     ```
-    c. Open JupyterLab:
-    ```
-    jupyter lab
-    ```
-    Note: to remove kernel from Jupyter:
+    * Note: to remove kernel from Jupyter:
     ```
     jupyter kernelspec uninstall multi-label-datasets
     ```
@@ -62,16 +54,25 @@ The following datasets are used here:
 4. RCV1 - agreement clauses needs to be checked
 5. Reuters - agreement clauses needs to be checked
 
-Note: to generate the report, you don't need the raw data, since the minimal data to generate the report is saved to git in `data_report/data_report.csv`. If you want to regenerated this file, do the following:
+Note: to generate the report, you don't need the raw data, since the minimal data to generate the report is saved to git in `data_report/data_report.csv`. If you want to regenerate this file, do the following:
 1. Download the datasets above (Mulan and Reuters not currently supported) into `data_raw`.
-2. Run `python data_report.py` to transform the raw data into the minimal data needed to generate the report (stored in `data_report/data_report.csv`). Note: this csv is small and is commited to git so that the report can be regenerated without the need of the raw data.
+2. Run:
+```
+python data_report.py
+```
+This will transform the raw data into `data_report/data_report.csv`. Note: this csv is small and is commited to git so that the report can be regenerated without the need of the raw data.
 
 # Generating the full report
-1. Install requirements
-2. This repository does not come with a jupyter notebook, and so you cannot see any of the plots in the report. However, this can easily be generated from the `analysis.md` file, which is written in MyST markdown. You just need to run `jupytext analysis.md --to ipynb`
+This repository does not come with a jupyter notebook, and so you cannot see any of the plots in the report. However, this can easily be generated from the `analysis.md` file, which is written in MyST markdown. You just need to run:
+```
+jupytext analysis.md --to ipynb
+```
 
 # Extending the analysis
 If you want to extend this analysis and see the results at the same time, the easiest way is to pair the markdown file with the jupyter notebook you generated in the last step. To pair the md and ipynb:
 
-1. Start `jupyter lab`.
+1. Start jupyter lab:
+```
+jupyter lab
+```
 2. Open `analysis.ipynb` and use `jupytext` to pair it with `analysis.md`. See instructions [here](https://jupytext.readthedocs.io/en/latest/paired-notebooks.html).
