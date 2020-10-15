@@ -55,10 +55,23 @@ pip install -r requirements.txt
     ```
 
 # Datasets
-* Using the following links, download all the datasets and put in the `datasets/` directory:
+The following datasets are used here:
 1. [CMU Movie Summary Corpus](http://www.cs.cmu.edu/~ark/personas/) as used on [this blog](https://towardsdatascience.com/multi-label-text-classification-5c505fdedca8).
 2. [Toxic Comment Classification Challenge](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge) (but very few datapoint with multiple labels).
 3. [Mulan](http://mulan.sourceforge.net/datasets-mlc.html) (under "text" category).
 4. RCV1 - agreement clauses needs to be checked
 5. Reuters - agreement clauses needs to be checked
 
+Note: to generate the report, you don't need the raw data, since the minimal data to generate the report is saved to git in `data_report/data_report.csv`. If you want to regenerated this file, do the following:
+1. Download the datasets above (Mulan and Reuters not currently supported) into `data_raw`.
+2. Run `python data_report.py` to transform the raw data into the minimal data needed to generate the report (stored in `data_report/data_report.csv`). Note: this csv is small and is commited to git so that the report can be regenerated without the need of the raw data.
+
+# Generating the full report
+1. Install requirements
+2. This repository does not come with a jupyter notebook, and so you cannot see any of the plots in the report. However, this can easily be generated from the `analysis.md` file, which is written in MyST markdown. You just need to run `jupytext analysis.md --to ipynb`
+
+# Extending the analysis
+If you want to extend this analysis and see the results at the same time, the easiest way is to pair the markdown file with the jupyter notebook you generated in the last step. To pair the md and ipynb:
+
+1. Start `jupyter lab`.
+2. Open `analysis.ipynb` and use `jupytext` to pair it with `analysis.md`. See instructions [here](https://jupytext.readthedocs.io/en/latest/paired-notebooks.html).
