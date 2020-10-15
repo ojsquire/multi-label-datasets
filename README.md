@@ -54,13 +54,13 @@ The following datasets are used here:
 4. RCV1 - agreement clauses needs to be checked
 5. Reuters - agreement clauses needs to be checked
 
-Note: to generate the report, you don't need the raw data, since the minimal data to generate the report is saved to git in `data_report/data_report.csv`. If you want to regenerate this file, do the following:
+Note: to generate the report, you don't need the raw data, since the minimal data to generate the report is saved to git in `data_report/data_report.csv` (a very small file). If you want to regenerate this file, do the following:
 1. Download the datasets above (Mulan and Reuters not currently supported) into `data_raw`.
 2. Run:
 ```
 python data_report.py
 ```
-This will transform the raw data into `data_report/data_report.csv`. Note: this csv is small and is commited to git so that the report can be regenerated without the need of the raw data.
+This will transform the raw data into `data_report/data_report.csv`.
 
 # Generating the full report
 This repository does not come with a jupyter notebook, and so you cannot see any of the plots in the report. However, this can easily be generated from the `analysis.md` file, which is written in MyST markdown. You just need to run:
