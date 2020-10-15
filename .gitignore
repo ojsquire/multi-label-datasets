@@ -130,6 +130,7 @@ dmypy.json
 .pyre/
 
 # Custom
-datasets/
+data_raw/
 .DS_Store
 settings.json
+.vscode/

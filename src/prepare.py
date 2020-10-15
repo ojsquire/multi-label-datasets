@@ -35,10 +35,10 @@ def movies_summary_stats(movies):
 
     stats = {}
 
-    stats["nr_classes"] = genres.shape[0]
-    stats["mean_labels_per_sample"] = round(movies["nr_classes"].mean(), 3)
+    stats["nr_classes"] = [genres.shape[0]]
+    stats["mean_labels_per_sample"] = [round(movies["nr_classes"].mean(), 3)]
 
-    return stats
+    return pd.DataFrame(stats)
 
 
 def toxic_label_counts(toxic):
@@ -57,10 +57,10 @@ def toxic_summary_stats(toxic):
     
     stats = {}
 
-    stats["nr_classes"] = len(categories)
-    stats["mean_labels_per_sample"] = round(toxic['nr_classes'].mean(), 3)
+    stats["nr_classes"] = [len(categories)]
+    stats["mean_labels_per_sample"] = [round(toxic['nr_classes'].mean(), 3)]
 
-    return stats
+    return pd.DataFrame(stats)
 
 
 def rcv1_clean_up(rcv1):
@@ -88,31 +88,57 @@ def rcv1_summary_stats(rcv1, unique_classes):
 
     stats = {}
 
-    stats["nr_classes"] = len(unique_classes)
-    stats["mean_labels_per_sample"] = round(rcv1['nr_classes'].mean(), 3)
+    stats["nr_classes"] = [len(unique_classes)]
+    stats["mean_labels_per_sample"] = [round(rcv1['nr_classes'].mean(), 3)]
 
-    return stats
+    return pd.DataFrame(stats)
 
 
-def multi_label_distribution(data):
+def stats_transform(stats, dataset_name):
+
+    stats["info_type"] = "stats"
+    stats["dataset"] = dataset_name
+
+    stats = pd.melt(
+        stats.reset_index(),
+        id_vars=["index", "info_type", "dataset"],
+        value_vars=["nr_classes", "mean_labels_per_sample"],
+        var_name="metric",
+        value_name="value")
+
+    return stats[["index", "dataset", "info_type", "metric", "value"]]
+
+
+def multi_label_distribution(data, dataset_name):
     """Get multi-label distribution
 
     How many examples are there with each number of labels?
     """
 
-    return data["nr_classes"].value_counts().sort_index()
+    data = data["nr_classes"].value_counts().sort_index().reset_index()
+    data = data.rename(columns={"nr_classes": "nr_examples", "index": "nr_labels"})
+    data["info_type"] = "distribution"
+    data["dataset"] = dataset_name
+
+    data = pd.melt(
+        data.reset_index(),
+        id_vars=["index", "info_type", "dataset"],
+        value_vars=["nr_examples", "nr_labels"],
+        var_name="metric",
+        value_name="value")
+
+    return data[["index", "dataset", "info_type", "metric", "value"]]
 
 
-def write_stats(save_path, stats):
+def combine_distribution_stats(datasets):
+    return (
+        pd
+        .concat(datasets)
+        .sort_values(["dataset", "info_type", "metric", "index"]))
+
+
+def write_data_report(dataset, filename):
     """
     """
 
-    stats = pd.DataFrame(stats)
-    stats.to_csv(save_path, index=False)
-
-
-def write_multi_label_distribution(save_path, multi_label_distribution):
-    """
-    """
-
-    multi_label_distribution.to_csv(save_path, index=False)
+    dataset.to_csv(f"data_report/{filename}.csv", index=False)

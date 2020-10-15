@@ -9,7 +9,7 @@ def get_movies():
     """
 
     movies= pd.read_csv(
-        "datasets/cmu_movies/movie.metadata.tsv",
+        "data_raw/cmu_movies/movie.metadata.tsv",
         usecols=[0, 2, 8],
         sep="\t",
         header=None)
@@ -23,14 +23,14 @@ def get_toxic():
     """Get toxic comment labels
     """
 
-    return pd.read_csv("datasets/toxic_comment/train.csv")
+    return pd.read_csv("data_raw/toxic_comment/train.csv")
 
 
 def get_rcv1():
     """Get labels for mini RCV1 dataset
     """
 
-    with open("datasets/rcv1.multilabel/rcv1.multilabel.labels.pkl", "rb") as pickle_file:
+    with open("data_raw/rcv1.multilabel/rcv1.multilabel.labels.pkl", "rb") as pickle_file:
         rcv1 = pickle.load(pickle_file)
 
     return rcv1

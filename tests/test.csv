@@ -1,0 +1,5 @@
+index,dataset,info_type,metric,value
+0,movies,distribution,nr_examples,2.0
+1,movies,distribution,nr_examples,4.0
+0,movies,distribution,nr_labels,0.0
+1,movies,distribution,nr_labels,1.0
